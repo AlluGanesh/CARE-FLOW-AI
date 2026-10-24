@@ -90,6 +90,23 @@
   padding: 0;
 }
 
+/* Global Button Reset to eliminate default user-agent white/buttonface background */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  text-align: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-primary);
@@ -187,19 +204,22 @@ code, pre, .font-mono {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  padding: 0.6rem 0.8rem;
+  background: rgba(18, 28, 47, 0.85);
+  border: 1px solid var(--border-card);
+  padding: 0.65rem 0.85rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.25rem;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all var(--transition-fast);
+  color: var(--text-primary);
+  width: 100%;
 }
 
 .tenant-badge-pill:hover {
   border-color: var(--border-teal-glow);
   background: var(--bg-card-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .nav-group-title {
@@ -208,9 +228,10 @@ code, pre, .font-mono {
   letter-spacing: 0.08em;
   color: var(--text-muted);
   font-weight: 700;
-  padding: 0.5rem 0.75rem 0.35rem;
+  padding: 0.6rem 0.75rem 0.35rem;
 }
 
+/* Nav Item Styling - Completely dark & sleek, zero white background artifacts */
 .nav-item {
   display: flex;
   align-items: center;
@@ -223,44 +244,85 @@ code, pre, .font-mono {
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 1px solid transparent;
-  margin-bottom: 0.2rem;
+  background: transparent !important;
+  margin-bottom: 0.25rem;
   text-decoration: none;
+  width: 100%;
+  position: relative;
+  text-align: left;
 }
 
 .nav-item:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateX(2px);
 }
 
 .nav-item.active {
-  color: #38bdf8;
-  background: rgba(14, 165, 233, 0.12);
-  border-color: rgba(14, 165, 233, 0.25);
+  color: #38bdf8 !important;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.16) 0%, rgba(14, 165, 233, 0.03) 100%) !important;
+  border-color: rgba(14, 165, 233, 0.32);
   font-weight: 600;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.12);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--teal-vibrant);
+  box-shadow: 0 0 8px var(--teal-vibrant);
+}
+
+.nav-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.nav-item:hover .nav-item-icon {
+  color: var(--text-primary);
+}
+
+.nav-item.active .nav-item-icon {
+  color: var(--teal-vibrant);
 }
 
 .nav-badge {
   margin-left: auto;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
   border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
 }
 
 .nav-badge.alert {
-  background: var(--rose-bg);
-  color: var(--rose-danger);
-  border: 1px solid rgba(244, 63, 94, 0.25);
+  background: rgba(244, 63, 94, 0.16);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.35);
 }
 
 .nav-badge.info {
   background: rgba(14, 165, 233, 0.15);
-  color: var(--teal-vibrant);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.3);
 }
 
 .nav-badge.agent {
-  background: var(--violet-bg);
+  background: rgba(139, 92, 246, 0.18);
   color: #c084fc;
+  border: 1px solid rgba(139, 92, 246, 0.35);
 }
 
 .user-profile-widget {

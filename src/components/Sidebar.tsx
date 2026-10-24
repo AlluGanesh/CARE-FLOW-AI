@@ -140,7 +140,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
           onClick={() => onSelectView('dashboard')}
         >
-          <LayoutDashboard size={18} />
+          <span className="nav-item-icon"><LayoutDashboard size={18} /></span>
           <span>Operations Dashboard</span>
           {overdueCount > 0 && <span className="nav-badge alert">{overdueCount} Overdue</span>}
         </button>
@@ -149,7 +149,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'tasks' ? 'active' : ''}`}
           onClick={() => onSelectView('tasks')}
         >
-          <CheckSquare size={18} />
+          <span className="nav-item-icon"><CheckSquare size={18} /></span>
           <span>Follow-Up Task Queue</span>
           {escalationCount > 0 && <span className="nav-badge alert">{escalationCount} Esc</span>}
         </button>
@@ -158,7 +158,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'approval' ? 'active' : ''}`}
           onClick={() => onSelectView('approval')}
         >
-          <Stethoscope size={18} />
+          <span className="nav-item-icon"><Stethoscope size={18} /></span>
           <span>Doctor Care Plan AI</span>
           <span className="nav-badge info">HITL</span>
         </button>
@@ -167,7 +167,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'patient-portal' ? 'active' : ''}`}
           onClick={() => onSelectView('patient-portal')}
         >
-          <Smartphone size={18} />
+          <span className="nav-item-icon"><Smartphone size={18} /></span>
           <span>Patient Follow-Up Portal</span>
         </button>
 
@@ -177,7 +177,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'agent-monitor' ? 'active' : ''}`}
           onClick={() => onSelectView('agent-monitor')}
         >
-          <Bot size={18} color="var(--violet-agent)" />
+          <span className="nav-item-icon"><Bot size={18} color="var(--violet-agent)" /></span>
           <span>Multi-Agent Orchestrator</span>
           <span className="nav-badge agent">6 Agents</span>
         </button>
@@ -186,7 +186,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'appointments' ? 'active' : ''}`}
           onClick={() => onSelectView('appointments')}
         >
-          <Calendar size={18} />
+          <span className="nav-item-icon"><Calendar size={18} /></span>
           <span>Appointments</span>
         </button>
 
@@ -194,7 +194,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'reports' ? 'active' : ''}`}
           onClick={() => onSelectView('reports')}
         >
-          <FileText size={18} />
+          <span className="nav-item-icon"><FileText size={18} /></span>
           <span>Diagnostic Reports (OCR)</span>
         </button>
 
@@ -202,7 +202,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'communications' ? 'active' : ''}`}
           onClick={() => onSelectView('communications')}
         >
-          <Send size={18} />
+          <span className="nav-item-icon"><Send size={18} /></span>
           <span>Patient Outbox & SMS</span>
         </button>
 
@@ -210,7 +210,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className={`nav-item ${currentView === 'audit' ? 'active' : ''}`}
           onClick={() => onSelectView('audit')}
         >
-          <ShieldAlert size={18} />
+          <span className="nav-item-icon"><ShieldAlert size={18} /></span>
           <span>Audit & Traceability</span>
         </button>
       </nav>

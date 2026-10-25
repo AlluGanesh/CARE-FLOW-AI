@@ -4,10 +4,10 @@
 
 ### **Intelligent Patient Care Coordination & Follow-Up Automation SaaS**
 
-[![Version](https://img.shields.io/badge/version-1.0.0--preview-0ea5e9.svg?style=for-the-badge)](https://github.com/Harshith-ka/CareFlow-Ai)
-[![Architecture](https://img.shields.io/badge/architecture-Multi--Tenant%20%7C%20Multi--Agent%20AI-8b5cf6.svg?style=for-the-badge)](https://github.com/Harshith-ka/CareFlow-Ai)
-[![HITL](https://img.shields.io/badge/safety-Clinician--In--The--Loop-10b981.svg?style=for-the-badge)](https://github.com/Harshith-ka/CareFlow-Ai)
-[![Stack](https://img.shields.io/badge/stack-React%20%7C%20TypeScript%20%7C%20Vite-06b6d4.svg?style=for-the-badge)](https://github.com/Harshith-ka/CareFlow-Ai)
+[![Version](https://img.shields.io/badge/version-1.0.0--preview-0ea5e9.svg?style=for-the-badge)](https://github.com/AlluGanesh/CARE-FLOW-AI)
+[![Architecture](https://img.shields.io/badge/architecture-Multi--Tenant%20%7C%20Multi--Agent%20AI-8b5cf6.svg?style=for-the-badge)](https://github.com/AlluGanesh/CARE-FLOW-AI)
+[![HITL](https://img.shields.io/badge/safety-Clinician--In--The--Loop-10b981.svg?style=for-the-badge)](https://github.com/AlluGanesh/CARE-FLOW-AI)
+[![Stack](https://img.shields.io/badge/stack-React%20%7C%20TypeScript%20%7C%20Vite-06b6d4.svg?style=for-the-badge)](https://github.com/AlluGanesh/CARE-FLOW-AI)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <br/>
@@ -16,12 +16,17 @@
 
 <br/>
 
+![CareFlow AI Clinic Operations Dashboard](docs/screenshots/clinic-operations-dashboard.png)
+
+<br/>
+
 [Key Capabilities](#-key-capabilities) •
 [Core Experiences](#-the-4-core-experiences) •
 [Agentic Architecture](#-multi-agent-ai-orchestration) •
 [Safety Guardrails](#-clinical-safety--audit-traceability) •
 [Quickstart](#-quickstart--local-setup) •
-[Data Model](#-database-schema--multi-tenancy)
+[Data Model](#-database-schema--multi-tenancy) •
+[Author](#-author)
 
 ---
 
@@ -81,6 +86,8 @@ graph LR
 
 CareFlow AI features **6 specialized agents** governed by deterministic business logic and strict safety boundaries:
 
+![CareFlow AI Multi-Agent AI Orchestration & Live Tracing](docs/screenshots/multi-agent-orchestrator.png)
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       LANGGRAPH MULTI-AGENT PIPELINE                        │
@@ -130,8 +137,8 @@ Because CareFlow AI operates in healthcare coordination, safety is an architectu
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Harshith-ka/CareFlow-Ai.git
-cd CareFlow-Ai
+git clone https://github.com/AlluGanesh/CARE-FLOW-AI.git
+cd CARE-FLOW-AI
 
 # 2. Install dependencies
 npm install
@@ -208,10 +215,17 @@ TENANT ──< AUDIT_EVENT (Immutable ledger: actor, action, timestamp, target)
 
 ---
 
+## 👤 Author
+
+* **Ganesh**
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-<sub>Built with precision for healthcare operators and clinicians.</sub>
+<sub>Built with precision by Ganesh for healthcare operators and clinicians.</sub>
 </div>
+

@@ -73,6 +73,21 @@ export const INITIAL_USERS: User[] = [
 
 export const INITIAL_PATIENTS: Patient[] = [
   {
+    id: 'pat-100',
+    tenantId: 'tenant-apex',
+    name: 'Ananya Rao',
+    age: 42,
+    gender: 'Female',
+    phone: '+91 98450 11223',
+    email: 'ananya.rao@example.com',
+    preferredLanguage: 'en',
+    consentGiven: true,
+    assignedDoctorId: 'usr-dr-sharma',
+    primaryDiagnosis: 'Type 2 Diabetes Mellitus Follow-Up',
+    lastVisitDate: '2026-10-24',
+    avatarBg: '#ec4899'
+  },
+  {
     id: 'pat-101',
     tenantId: 'tenant-apex',
     name: 'Priya Patel',
@@ -630,3 +645,70 @@ export const CLINICAL_PRESETS = [
     ]
   }
 ];
+
+export interface ResearchDemoPreset {
+  id: string;
+  patientId: string;
+  patientName: string;
+  title: string;
+  description: string;
+  rawReportText: string;
+}
+
+export const RESEARCH_DEMO_PRESETS: ResearchDemoPreset[] = [
+  {
+    id: 'preset-ananya',
+    patientId: 'pat-100',
+    patientName: 'Ananya Rao',
+    title: 'Ananya Rao — Diabetes Follow-Up Report',
+    description: 'Type 2 Diabetes, HbA1c 8.2%, FBS 165 mg/dL, Metformin 500 mg',
+    rawReportText: `Diagnosis: Type 2 Diabetes
+HbA1c: 8.2%
+Fasting Blood Sugar: 165 mg/dL
+Medication: Metformin 500 mg
+Follow-up: Review after 2 weeks.`
+  },
+  {
+    id: 'preset-rahul',
+    patientId: 'pat-102',
+    patientName: 'Rahul Verma',
+    title: 'Rahul Verma — Cardiology & Lipid Follow-Up',
+    description: 'Hypertension, Dyslipidemia, BP 138/88 mmHg, Cholesterol 215 mg/dL',
+    rawReportText: `Clinical Consultation Summary
+Patient: Rahul Verma
+Diagnosis: Hypertension, Dyslipidemia
+Medical Tests:
+- Blood Pressure: 138/88 mmHg
+- Total Cholesterol: 215 mg/dL
+- LDL Cholesterol: 132 mg/dL
+- HDL Cholesterol: 42 mg/dL
+- Serum Creatinine: 1.0 mg/dL
+Prescribed Medications:
+- Amlodipine 5 mg once daily
+- Atorvastatin 20 mg once daily
+Follow-up:
+Review in cardiology outpatient clinic after 4 weeks. Repeat lipid panel in 3 months.`
+  },
+  {
+    id: 'preset-priya',
+    patientId: 'pat-101',
+    patientName: 'Priya Patel',
+    title: 'Priya Patel — Metabolic & Renal Screening',
+    description: 'Type 2 Diabetes, Microalbuminuria, eGFR 68 mL/min, Urine ACR 45 mg/g',
+    rawReportText: `Metabolic & Renal Diagnostic Follow-Up
+Patient: Priya Patel
+Diagnosis: Type 2 Diabetes Mellitus with Microalbuminuria
+Laboratory Investigations:
+- HbA1c: 7.9%
+- Fasting Blood Sugar: 154 mg/dL
+- Serum Creatinine: 1.2 mg/dL
+- eGFR: 68 mL/min
+- Urine Albumin/Creatinine: 45 mg/g
+Medication:
+- Metformin 500 mg twice daily
+- Lisinopril 5 mg once daily
+Follow-up:
+Repeat Renal Function Panel in 6 weeks. Review with attending physician after 2 weeks. Upload laboratory report.`
+  }
+];
+

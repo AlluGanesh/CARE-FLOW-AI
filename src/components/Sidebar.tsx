@@ -12,7 +12,8 @@ import {
   ShieldAlert, 
   Building2, 
   ChevronDown,
-  UserCheck
+  UserCheck,
+  Microscope
 } from 'lucide-react';
 import { Tenant, UserRole } from '../types';
 
@@ -174,12 +175,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="nav-group-title" style={{ marginTop: '1rem' }}>Intelligence & Workflows</div>
 
         <button 
+          className={`nav-item ${currentView === 'research-agent' ? 'active' : ''}`}
+          onClick={() => onSelectView('research-agent')}
+        >
+          <span className="nav-item-icon"><Microscope size={18} color="var(--teal-vibrant)" /></span>
+          <span>Research Agent</span>
+          <span className="nav-badge info">Phase 2</span>
+        </button>
+
+        <button 
           className={`nav-item ${currentView === 'agent-monitor' ? 'active' : ''}`}
           onClick={() => onSelectView('agent-monitor')}
         >
           <span className="nav-item-icon"><Bot size={18} color="var(--violet-agent)" /></span>
           <span>Multi-Agent Orchestrator</span>
-          <span className="nav-badge agent">6 Agents</span>
+          <span className="nav-badge agent">7 Agents</span>
         </button>
 
         <button 

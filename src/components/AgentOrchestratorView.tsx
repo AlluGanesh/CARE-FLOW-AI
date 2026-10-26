@@ -83,6 +83,14 @@ export const AgentOrchestratorView: React.FC<AgentOrchestratorViewProps> = ({
       tools: ['create_escalation_ticket()', 'summarize_unresolved_history()', 'notify_staff_queue()'],
       safeguard: 'Clinical concerns always routed to qualified clinicians.',
       status: 'SUCCESS'
+    },
+    {
+      num: 7,
+      name: 'Medical Research Agent',
+      role: 'Autonomous research planning, authoritative regulatory source retrieval (FDA/MedlinePlus), evidence extraction, claim verification, grounded explanation synthesis, and citation generation.',
+      tools: ['search_medical_sources()', 'retrieve_source()', 'extract_evidence()', 'verify_claim()', 'generate_explanation()', 'validate_safety()', 'build_citation()'],
+      safeguard: 'RESEARCH → VERIFY → EXPLAIN → CITE. Zero autonomous prescribing or diagnosis; ungrounded assertions strictly rejected.',
+      status: 'SUCCESS'
     }
   ];
 

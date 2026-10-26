@@ -11,6 +11,7 @@ import { ReportsView } from './components/ReportsView';
 import { CommunicationsView } from './components/CommunicationsView';
 import { AuditView } from './components/AuditView';
 import { SimulateEventModal } from './components/SimulateEventModal';
+import { ResearchAgentView } from './components/ResearchAgentView';
 
 import { 
   INITIAL_TENANTS, 
@@ -61,6 +62,11 @@ export function App() {
   // Modal State
   const [isSimulateModalOpen, setIsSimulateModalOpen] = useState<boolean>(false);
   const [selectedPatientId, setSelectedPatientId] = useState<string>('pat-101');
+  const [approvedResearchMap, setApprovedResearchMap] = useState<Record<string, any>>({});
+
+  const handleApproveResearch = (patientId: string, result: any) => {
+    setApprovedResearchMap(prev => ({ ...prev, [patientId]: result }));
+  };
 
   // Tenant-Scoped Data (Demonstrates Strict Multi-Tenant Isolation)
   const tenantPatients = patients.filter(p => p.tenantId === activeTenant.id);
@@ -93,7 +99,7 @@ export function App() {
   };
 
   // Helper to add agent execution trace
-  const addAgentTrace = (agentNum: 1 | 2 | 3 | 4 | 5 | 6, name: string, status: 'SUCCESS' | 'FLAGGED', msg: string, tools: string[]) => {
+  const addAgentTrace = (agentNum: 1 | 2 | 3 | 4 | 5 | 6 | 7, name: string, status: 'SUCCESS' | 'FLAGGED', msg: string, tools: string[]) => {
     const newTrace: AgentExecutionTrace = {
       id: `tr-${Date.now()}`,
       timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
@@ -408,6 +414,7 @@ export function App() {
               tasks={tenantTasks}
               appointments={tenantAppointments}
               tenant={activeTenant}
+              approvedResearch={approvedResearchMap[selectedPatientId]}
               onUploadReport={handleUploadReport}
               onCompletePatientTask={handleCompletePatientTask}
             />
@@ -452,6 +459,17 @@ export function App() {
             <AuditView
               tenant={activeTenant}
               auditLogs={auditLogs}
+            />
+          )}
+
+          {currentView === 'research-agent' && (
+            <ResearchAgentView
+              tenant={activeTenant}
+              patients={tenantPatients}
+              userRole={currentRole}
+              onLogAudit={logAudit}
+              onAddAgentTrace={addAgentTrace}
+              onApproveResearch={handleApproveResearch}
             />
           )}
         </main>

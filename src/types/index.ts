@@ -157,7 +157,7 @@ export interface EscalationItem {
 export interface AgentExecutionTrace {
   id: string;
   timestamp: string;
-  agentNumber: 1 | 2 | 3 | 4 | 5 | 6;
+  agentNumber: 1 | 2 | 3 | 4 | 5 | 6 | 7;
   agentName: string;
   status: 'SUCCESS' | 'RUNNING' | 'FLAGGED' | 'IDLE';
   latencyMs: number;
@@ -176,3 +176,6 @@ export interface AuditEvent {
   resourceType: string;
   details: string;
 }
+
+export * from './research';
+

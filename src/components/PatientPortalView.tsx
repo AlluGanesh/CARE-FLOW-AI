@@ -24,6 +24,7 @@ interface PatientPortalViewProps {
   tasks: CareTask[];
   appointments: Appointment[];
   tenant: Tenant;
+  approvedResearch?: any;
   onUploadReport: (taskId: string, fileName: string) => void;
   onCompletePatientTask: (taskId: string) => void;
 }
@@ -33,6 +34,7 @@ export const PatientPortalView: React.FC<PatientPortalViewProps> = ({
   tasks,
   appointments,
   tenant,
+  approvedResearch,
   onUploadReport,
   onCompletePatientTask
 }) => {
@@ -321,6 +323,91 @@ export const PatientPortalView: React.FC<PatientPortalViewProps> = ({
                   >
                     {t.reschedule}
                   </button>
+                </div>
+              </div>
+            )}
+
+            {/* Doctor's Report — Verified Educational Summary (Section 40) */}
+            {approvedResearch ? (
+              <div style={{
+                background: 'rgba(16, 185, 129, 0.05)',
+                border: '1px solid var(--emerald-success)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '1.25rem',
+                marginBottom: '1.25rem',
+                animation: 'fade-in 0.3s ease'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--emerald-success)', fontWeight: 700, fontSize: '0.9rem' }}>
+                    <CheckCircle size={17} />
+                    <span>Your Doctor's Report · Reviewed & Approved</span>
+                  </div>
+                  <span className="status-chip completed" style={{ fontSize: '0.68rem' }}>
+                    Clinician Verified
+                  </span>
+                </div>
+
+                <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '0.85rem' }}>
+                  {approvedResearch.explanation || approvedResearch.summary || 'Your lab results have been reviewed by Dr. Rajesh Sharma. Below is verified educational guidance on your findings.'}
+                </div>
+
+                {approvedResearch.tests && approvedResearch.tests.length > 0 && (
+                  <div style={{ marginBottom: '0.75rem', background: 'var(--bg-secondary)', padding: '0.65rem 0.85rem', borderRadius: 'var(--radius-md)' }}>
+                    <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--teal-vibrant)', marginBottom: '0.3rem' }}>
+                      Diagnostic Tests Overview
+                    </div>
+                    {approvedResearch.tests.map((t: any, i: number) => (
+                      <div key={i} style={{ fontSize: '0.76rem', color: 'var(--text-primary)', display: 'flex', justifyContent: 'space-between', padding: '0.2rem 0' }}>
+                        <span>{t.name || t.testName}</span>
+                        <strong style={{ color: t.status === 'HIGH' ? 'var(--rose-danger)' : 'var(--text-primary)' }}>
+                          {t.value} {t.unit}
+                        </strong>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {approvedResearch.medicines && approvedResearch.medicines.length > 0 && (
+                  <div style={{ marginBottom: '0.75rem', background: 'var(--bg-secondary)', padding: '0.65rem 0.85rem', borderRadius: 'var(--radius-md)' }}>
+                    <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--violet-agent)', marginBottom: '0.3rem' }}>
+                      Medication Guidance (FDA Official Indication)
+                    </div>
+                    {approvedResearch.medicines.map((m: any, i: number) => (
+                      <div key={i} style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', padding: '0.2rem 0' }}>
+                        <strong style={{ color: 'var(--text-primary)' }}>{m.name || m.drugName}</strong>: {m.purpose || m.drugClass || 'Prescribed blood glucose management agent'}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div style={{
+                  fontSize: '0.72rem',
+                  color: 'var(--text-muted)',
+                  borderTop: '1px solid rgba(16, 185, 129, 0.2)',
+                  paddingTop: '0.6rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem'
+                }}>
+                  <ShieldAlert size={13} color="var(--amber-warning)" style={{ flexShrink: 0 }} />
+                  <span>Notice: This information is for education only. It does not replace your doctor's advice or change your prescription.</span>
+                </div>
+              </div>
+            ) : (
+              <div style={{
+                background: 'var(--bg-card)',
+                border: '1px dashed var(--border-card)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '1rem 1.25rem',
+                marginBottom: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.65rem',
+                opacity: 0.9
+              }}>
+                <Clock size={16} color="var(--amber-warning)" style={{ flexShrink: 0 }} />
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  <strong style={{ color: 'var(--text-secondary)' }}>Medical Research Privacy Notice:</strong> New lab report research remains private until reviewed and approved by your attending clinician.
                 </div>
               </div>
             )}

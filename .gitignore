@@ -22,3 +22,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pytest_cache/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+careflow.db
+backend/careflow.db
+
+

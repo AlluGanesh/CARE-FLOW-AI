@@ -195,23 +195,284 @@ TENANT ──< AUDIT_EVENT (Immutable ledger: actor, action, timestamp, target)
 
 ---
 
+## 🔬 Evidence-Based Medical Research Agent (Agent 7)
+
+CareFlow AI features an autonomous **Evidence-Based Medical Research Agent** designed to translate complex medical reports, laboratory panels, and medications into plain-English, source-grounded patient explanations.
+
+```
+Medical Report
+      │
+      ▼
+Phase 1 Extraction (Conditions, Tests, Medicines)
+      │
+      ▼
+Research Planner (Objective Evidence Queries)
+      │
+      ▼
+Source Retriever (Tier 1 Regulatory & Health Agencies: FDA, MedlinePlus, CDC, NHS)
+      │
+      ▼
+Evidence Extractor (Targeted Clinical Statements)
+      │
+      ▼
+Evidence Verifier (Cross-Reference Claims & Detect Contradictions)
+      │
+      ▼
+Grounded LLM Synthesizer (Structured Definitions Grounded in Evidence)
+      │
+      ▼
+Clinical Safety Validator (Non-Diagnostic & Non-Prescriptive Enforcer)
+      │
+      ▼
+Citation Builder (Numbered References [1], [2] with Real Canonical URLs)
+      │
+      ▼
+Final Evidence Dossier & Clinician Oversight Summary
+```
+
+### Critical Safety Principles
+* **Workflow Boundary**: `RESEARCH → VERIFY → EXPLAIN → CITE`.
+* **Prohibited Operations**: Never `DIAGNOSE → PRESCRIBE`. The Research Agent provides educational, evidence-grounded information and does not diagnose, prescribe, or modify treatment.
+* **Physician Primacy**: Drug indication summaries are drawn directly from official regulatory drug labeling (e.g. FDA-approved labeling). Patients must follow prescribing clinicians directly.
+* **Hallucination Prevention**: If no authoritative source is found for a clinical item, definitive claims are withheld.
+
+### Source Trust Hierarchy
+1. **Tier 1 (Highest Priority)**: Official regulatory and national government health portals (`fda.gov`, `medlineplus.gov`, `nih.gov`, `nhs.uk`, `cdc.gov`, `who.int`, `cdsco.gov.in`).
+2. **Tier 2**: Major academic hospital systems and specialty societies (`mayoclinic.org`, `hopkinsmedicine.org`, `diabetes.org`).
+3. **Excluded**: Unverified SEO blogs, commercial forums, and social media.
+
+### Resilience & Fallback Architecture
+If the external LLM or research provider is offline, unreachable, or rate-limited, the system automatically falls back to Phase 1 deterministic rule-based clinical definitions, clearly indicating `🟡 Phase 1 Baseline Fallback Mode` in the user interface.
+
+---
+
 ## 🗺️ Roadmap & Service Evolution
 
-- [x] **Phase 1: SaaS Prototype & Interactive Multi-Agent Simulator**
+- [x] **Phase 1: Foundation & Deterministic Report Understanding**
   - [x] Multi-persona dashboard (Admin, Doctor, Nurse, Patient)
-  - [x] Live 6-Agent LangGraph visualizer & terminal trace runner
+  - [x] Interactive 6-Agent LangGraph visualizer & terminal trace runner
   - [x] Clinician HITL care plan extraction with source grounding
   - [x] Multilingual patient follow-up portal
-  - [x] Diagnostic report OCR parameter extraction
-- [ ] **Phase 2: Production Monorepo & Backend Engine**
-  - [ ] NestJS / FastAPI REST API with OpenAPI documentation
-  - [ ] PostgreSQL + Prisma ORM with Row-Level Security (RLS)
-  - [ ] Redis + BullMQ notification background workers
-  - [ ] Python LangGraph agent microservice with OpenTelemetry tracing
-- [ ] **Phase 3: Clinical Hardening & Integrations**
-  - [ ] WhatsApp Cloud API integration
-  - [ ] ABDM / FHIR compatibility integration
-  - [ ] 200+ synthetic clinical scenario benchmark suite
+  - [x] Diagnostic report parameter extraction & dictionary explanation
+- [x] **Phase 2: Evidence-Based Medical Research Engine**
+  - [x] Autonomous Agent 7 (Medical Research Agent)
+  - [x] Tier-1 regulatory source registry (FDA, MedlinePlus, CDC, NHS)
+  - [x] Fact extraction, cross-claim verification & contradiction detection
+  - [x] Server/client LLM provider abstraction with mock fallback
+  - [x] Grounded numbered citations [1], [2] with canonical URLs
+- [x] **Phase 3: Production-Oriented Agentic Backend & HITL Clinical Workflow**
+  - [x] FastAPI REST API backend with SQLAlchemy 2.0 & Pydantic v2
+  - [x] Multi-tenant PostgreSQL / SQLite persistence with Alembic migrations
+  - [x] Server-side Agent 7 state machine (`OBSERVE → PLAN → ACT → VERIFY → SAFETY → HITL → EXECUTE → AUDIT`)
+  - [x] Strict Human-in-the-Loop Clinician Approval Gate (`APPROVE`, `REJECT`, `REQUEST_REVISION`)
+  - [x] Adaptive Clinician Revision Feedback Loop (re-research with clinical guidance)
+  - [x] Patient Visibility Boundary (unapproved research strictly hidden from patients)
+  - [x] Healthcare Safety Validator (enforces `RESEARCH → VERIFY → EXPLAIN → CITE`, never `DIAGNOSE → PRESCRIBE`)
+  - [x] Prompt Injection Shield (sanitizes untrusted source content)
+  - [x] Emergency symptom detection & redirection
+  - [x] Append-only, tamper-evident audit ledger with SHA-256 cryptographic hash chaining
+  - [x] Backend task orchestration & Overdue Escalation Engine
+  - [x] Multi-channel notification outbox abstraction
+
+---
+
+## 🏛️ Phase 3 Architecture Overview
+
+```
+                                  CARE-FLOW AI
+                                       │
+                                       ▼
+                              React Frontend (Vite)
+                                       │
+                                       ▼
+                          Secure REST API (FastAPI)
+                                       │
+                         Tenant & RBAC Verification
+                                       │
+                                       ▼
+                            Server-Side Orchestrator
+                                       │
+              ┌────────────────────────┼────────────────────────┐
+              │                        │                        │
+              ▼                        ▼                        ▼
+       Care Plan Agent          Research Agent          Follow-Up Agent
+              │                  (Agent 7)                     │
+              ▼                        │                        ▼
+       Clinical Parser                 │                 Workflow Engine
+              │                        │                        │
+              └────────────────────────┼────────────────────────┘
+                                       ▼
+                       State Machine & Evidence Pipeline
+                                       │
+                                       ▼
+                       Prompt Injection & Safety Validator
+                                       │
+                                       ▼
+                         Human Approval Gate (HITL)
+                                       │
+                        ┌──────────────┴──────────────┐
+                        ▼                             ▼
+                    Approved                       Rejected / Revision
+                        │                             │
+                        ▼                             ▼
+             Release to Patient Portal             Iterate / Block
+                        │
+                        ▼
+            Append-Only Cryptographic Audit Log (SHA-256 Chained)
+                        │
+                        ▼
+                 Relational Database (PostgreSQL / SQLite)
+```
+
+---
+
+## 🛠️ Backend Setup & Configuration
+
+### Prerequisites
+* **Python**: `>= 3.11`
+* **Node.js**: `>= 18.0`
+
+### 1. Environment Configuration
+
+Create a `.env` file in the `backend/` directory from `.env.example`:
+
+```bash
+cd backend
+cp .env.example .env
+```
+
+Key environment variables:
+
+```env
+APP_ENV=development
+PORT=8000
+FRONTEND_ORIGIN=http://localhost:5173
+
+# Database (SQLite for local zero-config, PostgreSQL for production)
+DATABASE_URL=sqlite:///./careflow.db
+
+# Authentication
+JWT_SECRET=supersecret-careflow-ai-jwt-key-change-in-production-2026
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=480
+
+# LLM Provider Configuration (mock or external)
+LLM_PROVIDER=mock
+LLM_API_KEY=
+LLM_MODEL=gpt-4o-mini
+
+# Research Guardrail Limits
+MAX_RESEARCH_TASKS=20
+MAX_SOURCES_PER_TASK=5
+MAX_RETRIES=2
+RESEARCH_CACHE_TTL_HOURS=24
+```
+
+### 2. Install Dependencies & Run Migrations
+
+```powershell
+# In CAREFLOW-AI/backend:
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Run Alembic database migrations to head
+alembic upgrade head
+
+# Seed initial tenants, users, patients, and tasks
+python -m app.db.seed
+```
+
+### 3. Start the Backend Server
+
+```powershell
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Health check verification:
+```powershell
+curl http://127.0.0.1:8000/health
+# Response: {"status":"ok","database":"connected","version":"3.0.0"}
+```
+
+### 4. Start the Frontend Server
+
+```powershell
+# In CAREFLOW-AI root directory:
+npm install
+npm run dev
+```
+
+Frontend runs at `http://localhost:5173/`.
+
+---
+
+## 📡 REST API Reference
+
+| Method | Endpoint | Description | Minimum Role |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/health` | System & DB health verification | Public |
+| `POST` | `/api/auth/login` | Authenticate & issue tenant-scoped JWT | Public |
+| `GET` | `/api/auth/me` | Fetch authenticated user profile & tenant | Authenticated |
+| `GET` | `/api/patients` | List tenant patients | Authenticated |
+| `GET` | `/api/patients/{id}` | Retrieve patient dossier (tenant-isolated) | Authenticated |
+| `POST` | `/api/research/runs` | Initiate Agent 7 research run from report text | Clinician/Admin |
+| `GET` | `/api/research/runs/{id}` | Real-time status, progress & task counts | Authenticated |
+| `GET` | `/api/research/runs/{id}/result` | Fetch dossier (**blocks Patients until APPROVED**) | Authenticated |
+| `POST` | `/api/research/runs/{id}/approve` | Clinician approval release gate | Clinician/Admin |
+| `POST` | `/api/research/runs/{id}/reject` | Clinician rejection with clinical reasoning | Clinician/Admin |
+| `POST` | `/api/research/runs/{id}/revision` | Request research iteration with feedback | Clinician/Admin |
+| `GET` | `/api/tasks` | List care tasks with overdue detection | Authenticated |
+| `POST` | `/api/tasks` | Create new care task | Authenticated |
+| `PATCH` | `/api/tasks/{id}` | Update care task status & notes | Authenticated |
+| `POST` | `/api/tasks/escalate` | Trigger Agent 5 overdue task escalation engine | Clinician/Admin |
+| `GET` | `/api/audit` | Fetch tenant append-only audit trail | Authenticated |
+| `GET` | `/api/audit/verify-integrity` | Cryptographic SHA-256 chain verification | Admin/Compliance |
+
+---
+
+## 🔒 Security & Healthcare Safety Protocol
+
+### 1. The Core Principle
+$$\text{RESEARCH} \longrightarrow \text{VERIFY} \longrightarrow \text{EXPLAIN} \longrightarrow \text{CITE}$$
+$$\text{\textbf{NEVER }} \text{DIAGNOSE} \longrightarrow \text{PRESCRIBE}$$
+
+* **Non-Diagnostic**: The system strictly translates documented findings into educational summaries; it never diagnoses a condition or confirms pathology.
+* **Non-Prescriptive**: Medication information is derived strictly from official regulatory labeling (FDA/EMA); never suggests starting, altering, or stopping doses.
+* **Emergency Triage Filter**: Unhandled emergency phrases (*e.g., crushing chest pain, sudden numbness, anaphylaxis*) immediately halt educational explanations and direct the patient to 911 / emergency care.
+
+### 2. Prompt Injection Defense
+All retrieved external medical source content is treated as untrusted data. The `PromptInjectionShield` strips prompt injection directives, adversarial markdown overrides, and fake citation vectors before content reaches the synthesis engine.
+
+### 3. Patient Visibility Boundary
+Patients have strictly restricted access. Research results in `WAITING_FOR_APPROVAL` or `REJECTED` status return `403 Forbidden` to patients. Only once a licensed clinician signs off with `APPROVED` does the verified summary appear in the Patient Portal, accompanied by mandatory educational disclaimers.
+
+### 4. Tamper-Evident Cryptographic Audit Ledger
+Every agent state transition, clinician decision, and report query is committed to an append-only audit log. Each event records:
+$$\text{hash}_n = \text{SHA-256}\big(\text{hash}_{n-1} \parallel \text{JSON}(\text{event}_n)\big)$$
+Any manual database alteration breaks the chain and is immediately flagged by `/api/audit/verify-integrity`.
+
+---
+
+## 🧪 Testing & Quality Verification
+
+Run backend and frontend test suites:
+
+```powershell
+# Run backend pytest suite (13 tests)
+cd backend
+python -m pytest -v
+
+# Run frontend vitest suite (15 tests)
+cd ..
+npm test -- --run
+
+# Run TypeScript build verification
+npm run build
+
+# Run ESLint validation
+npm run lint
+```
 
 ---
 
